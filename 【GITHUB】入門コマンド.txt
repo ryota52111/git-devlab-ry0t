@@ -1,0 +1,109 @@
+﻿
+
+【初期設定】
+git config --global user.name "*******"
+******にgithubのユーザネームを入力。
+
+git config --global user.email "*******"
+******にgithubのメールアドレスを入力
+
+git remote add origin *******
+*******にリモートリポジトリのURLを入力
+
+
+【確認コマンド】
+git --version 
+versionの確認
+
+git remote -v
+リモートリポジトリに追加されたかの確認
+
+git status
+リポジトリの状態の確認
+
+git log
+ログの確認
+
+git branch
+ローカルリポジトリにあるブランチを確認
+
+git branch -r
+リモートリポジトリの一覧を確認
+
+git branch -a
+ローカルリポジトリとリモートリポジトリの一覧を確認
+
+
+【リモートリポジトリへの反映】
+git init
+フォルダをリポジトリに変更
+
+git add .
+変更があったファイルをステージに上げるコマンド
+
+git commit 
+git commit -m 'first commit'
+スナップショットを撮るコマンド
+※コミットするときは必ずコメントを入れる必要がある
+
+git push -u origin master
+ローカルリポジトリで設定したファイルをリモートリポジトリへコミットする
+※masterはブランチといって別名で保存というようなイメージ
+
+git push -f origin master
+過去のコミットの履歴が書き換わってしまい普通にpushができないときに強制プッシュする。
+（PC内環境が違う時などに使えそう）
+
+
+【ローカルリポジトリへの反映】
+git pull
+git pull origin master
+差分をローカルリポジトリへ反映させる
+※git pullでも反映できる
+
+
+git clone *******
+*******にリモートリポジトリのURLを入力
+すべてのリポジトリをダウンロードする
+
+
+【ブランチの作成】
+git branch *******
+ブランチの作成
+*******に作成したいブランチ名を入力
+
+git chekout *******
+ブランチに切り替え
+*******に切り替えたいブランチ名を入力
+
+git chekout -b *******
+ブランチを作成し、作成したブランチへ切り替えをする。
+*******に作成、切り替えたいブランチを入力
+
+【ブランチをリモートリポジトリへの反映】
+git push -u origin *******
+作成したブランチをリモートリポジトリへ反映
+※-uをつけて実行後はgit pushで反映可能
+
+git branch ******* origin /\\\\\\\
+リモートブランチで作成したブランチをローカルに反映
+*******へローカルに作成するブランチ名を入力
+\\\\\\\へ作成元のリモートブランチ名を入力
+
+【エラー対処】
+①Your local changes to the following files would be overwritten by merge:
+pull時、リモート先の情報が変わっていてローカルが変更されていない時に起こる模様。
+なお、端末自体が変わっている場合に起こる。
+
+対処①
+リモートが正しい場合にローカルを強制的に
+リモートに合わせる。
+# 1) リモートの最新を取ってきておいて・・
+$ git fetch origin master
+
+# 2) masterを、リモート追跡のmasterに強制的に合わせる
+$ git reset --hard origin/master
+
+対処②
+ローカルファイルをすべて消去しpull
+
