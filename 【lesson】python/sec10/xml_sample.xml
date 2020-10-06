@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<employee>
+     <user type="regularEmployee">
+          <id>0001</id>
+          <name>TaroYamada</name>
+     </user>
+     <user type="partTime">
+          <id>0002</id>
+          <name>HanakoIto</name>
+     </user>
+</employee>

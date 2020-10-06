@@ -1,0 +1,24 @@
+{
+    "Int": 6,
+    "Float": 6.6,
+    "String": "Python3",
+    "List": [
+        7,
+        8,
+        "F",
+        "E"
+    ],
+    "Dict": {
+        "C": 2,
+        "D": 3
+    },
+    "Tuple": [
+        2,
+        3.4,
+        null
+    ],
+    "Bool": [
+        true,
+        false
+    ]
+}
