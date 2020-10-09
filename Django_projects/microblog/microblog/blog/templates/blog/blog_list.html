@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block body %}
+    {% if user.is_authenticated %}
+    <p><a href="{% url 'create' %}" class="btn btn-primary">New</a></p>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            
+            {% for blog in blogs %}
+                <div class="post-preview">
+                    <a href="{% url 'detail' blog.pk %}">
+                        <h2 class="post-title">
+                            {{ blog.content }}
+                        </h2>
+                    </a>
+                    <p class="post-meta">{{ blog.posted_date }}</p>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+    {#    ?page=1 <- 1ページ目#}
+    {#    ?page=2 <- 2ページ目#}
+
+    <nav aria-label="Page navigation">
+        <ul class= "pagination">
+            <li>
+                <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+
+            {% for page in paginator.page_range %}
+            <li><a href="?page={{ page }}">{{ page }}</a></li>>
+            {% endfor %}
+
+            <li>
+                <a href="#"aria-label="Next">
+                    <span aria-hidden="trun">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+{% endblock %}
+
