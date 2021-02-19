@@ -5,7 +5,7 @@ import openpyxl
 test = []
 files = glob.glob("./tmp/*")
 for file in files:
-    split = os.path.split(file)[1]
+    split = os.path.splitext(os.path.basename(file))[0]
     test.append(split)
 print(test)
 
