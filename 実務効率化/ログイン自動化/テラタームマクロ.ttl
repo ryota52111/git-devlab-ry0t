@@ -1,0 +1,101 @@
+;========================================================================
+;; user/password()
+USERNAME1 = 'Z'
+PASSWORD1 = 'Z'
+SOURCEADDR = 'Z'
+;========================================================================
+;; user/password()
+SANSHINSSH = 'Z'
+PASSWORD2 = 'Z'
+;========================================================================
+;; user/password()
+AKASHI = 'Z'
+USERNAME3 = 'Z'
+PASSWORD3 = 'Z'
+;========================================================================
+default_ini = 'C:\Program Files (x86)\teraterm\TERATERM.INI'
+tempfile =  'my_teraterm_tmp_file.ini'
+
+getdir temp_ini
+strconcat temp_ini tempfile
+
+fileopen fdef default_ini 0 1
+if result != 0 then
+   messagebox "can not open default init" "open error"
+   exit
+endif
+;filedelete temp_ini
+fileopen ftmp temp_ini 0
+if result != 0 then
+   messagebox "can not open temp file" "open error"
+   exit
+endif
+
+while 1
+    hit=0
+    filereadln fdef line
+    if result=1  break
+    strsplit line '=' 9
+  
+    ; ‰æ–Ê‚Ì”wŒiF‚ð•Ï‚¦‚éB‚Ù‚ñ‚Æ‚Í Bold/Blink/URL ‚à•Ï‚¦‚é‚Æ—Ç‚¢B
+    strcompare groupmatchstr1 "VTColor"
+    if result=0 then
+       string = 'VTColor='
+       strconcat string VTColor
+       filewriteln ftmp string
+       hit = 1
+    endif
+
+    ; ‚Ù‚©‚É‚à•Ï‚¦‚éê‡‚ÍA‚±‚ñ‚ÈŠ´‚¶
+    strcompare groupmatchstr1 "MouseCursor"
+    if result=0 then
+       filewriteln ftmp "MouseCursor=hand"
+    endif
+
+
+;;##### telnet login() ###################################
+connect 'Z:23 /nossh /T=1'
+wait 'login:'
+sendln USERNAME1
+wait 'Password:'
+sendln PASSWORD1
+wait '››#'
+
+;; ##### telnet loging() #####################################
+strconcat COMMAND1 'telnet'
+strconcat COMMAND1 ' '
+strconcat COMMAND1 Z
+strconcat COMMAND1 ' '
+strconcat COMMAND1 'source'
+strconcat COMMAND1 ' ' 
+strconcat COMMAND1 SOURCEADDR
+sendln COMMAND1
+
+wait 'Password:'
+sendln PASSWORD2
+wait '>'
+sendln 'en'
+wait 'Password:'
+sendln PASSWORD2
+
+;; ##### telnet loging() #####################################
+strconcat COMMAND2 'ssh'
+strconcat COMMAND2 ' '
+strconcat COMMAND2 '-l'
+strconcat COMMAND2 ' '
+strconcat COMMAND2 '******'
+strconcat COMMAND2 ' '
+strconcat COMMAND2 '-v'
+strconcat COMMAND2 ' '
+strconcat COMMAND2 '2'
+strconcat COMMAND2 ' '
+strconcat COMMAND2 ******
+sendln COMMAND2
+
+wait 'Password:'
+sendln PASSWORD3
+wait '>'
+sendln 'en'
+wait 'Password:'
+sendln PASSWORD3
+
